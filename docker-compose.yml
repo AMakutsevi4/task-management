@@ -1,0 +1,43 @@
+volumes:
+  pg_task:
+
+networks:
+  pg-dev-network:
+    driver: bridge
+
+services:
+  task_db:
+    image: postgres:16.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: task_management
+    volumes:
+      - pg_task:/var/lib/postgresql/data
+    networks:
+      - pg-dev-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  task-management:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      task_db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://task_db:5432/task_management'
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+    networks:
+      - pg-dev-network
+    ports:
+      - "8443:8443"
