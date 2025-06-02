@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/task_management}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:password}
+
+  liquibase:
+    drop-first: ${LIQUIBASE_DROP_FIRST:false}
+
+server:
+  ssl:
+    enabled: ${SSL_ENABLED:true}
+    key-store: ${KEY_STORE:classpath:/keystore/baeldung.p12}
+    key-store-password: ${SSL_KEYSTORE_PASSWORD:password}
+    key-store-type: ${KEY_STORE_TYPE:PKCS12}
+    key-alias: ${SSL_KEY_ALIAS:baeldung}
+  port: ${SERVER_PORT:8443}
+
+upload:
+  dir: ${UPLOAD_DIR:uploads}

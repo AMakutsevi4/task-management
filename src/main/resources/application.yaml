@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: Management-task
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    drop-first: ${LIQUIBASE_DROP_FIRST:false}
+
+server:
+  ssl:
+    enabled: ${SSL_ENABLED}
+    key-store: ${KEY_STORE}
+    key-store-password: ${SSL_KEYSTORE_PASSWORD}
+    key-store-type: ${KEY_STORE_TYPE}
+    key-alias: ${SSL_KEY_ALIAS}
+  port: ${SERVER_PORT}
+
+upload:
+  dir: ${UPLOAD_DIR}

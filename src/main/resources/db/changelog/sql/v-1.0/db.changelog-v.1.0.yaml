@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: 05-2025/2025-05-30-create-task-table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 05-2025/2025-05-30-insert-task-table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 05-2025/2025-05-30-create-tag-table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 05-2025/2025-05-30-insert-tag-table.sql
+      relativeToChangelogFile: true
